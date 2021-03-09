@@ -23,27 +23,35 @@ class Scrapper
   end
 
   def is_recipe(message)
-    puts "scrapper is_recipe" + message
     unless @recipes_titles.nil?
-      puts "scrapper is_recipe true path"
       @recipes_titles.include?(message)
     end
   end
 
   def one_recipe_info(title)
     index = @recipes_titles.find_index(title)
-    @recipes[index]
+    recipe = @recipes[index]
+    result = "<b>#{recipe[:title]}</b>
+  #{recipe[:description]}
+    <b>#{recipe[:author]}</b>
+    <a href='#{recipe[:recipes_url]}'> Read More</a>"
+    unless result.nil?
+      result
+    else
+      "Sorry I couldn't extract the required info use GOOGLE Lazy :D"
+    end
+    
   end
 
   def recipes_info(titles, descriptions, recipes_urls, reviews, authors)
     @recipes = []
     @recipes_titles = titles
-    10.times do |i|
+    titles.length.times do |i|
       @recipes << {
         index: i,
         title: titles[i],
         description: descriptions[i],
-        recipes_urls: recipes_urls[i],
+        recipes_url: recipes_urls[i],
         review: reviews[i],
         author: authors[i]
       }
