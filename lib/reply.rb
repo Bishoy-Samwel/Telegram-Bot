@@ -5,9 +5,14 @@ class Reply
   def initialize
     @scrapper = Scrapper.new
     @reply_txt= {
-      'welcome' => 'Welcome to Chefo I am a Chef bot, what can I do for you?',
+      'welcome' => 'Welcome to Chefo I am a Chef bot.',
       # rubocop:disable Layout/LineLength
-      'commands' => "You can control me with these commands: \n /start - start the bot \n /stop - stop the bot \n /book - get a recommendation for a recipe of your preferred food category \n /help - see the list of available commands",
+      'commands' => "
+      You can control me with these commands: \n 
+      /start - start the bot \n 
+      /stop - stop the bot \n 
+      /suggest - get a recommendation for a recipe of your preferred food category \n 
+      /help - see the list of available commands",
       # rubocop:enable Layout/LineLength
       'suggestions' => 'Here are some suggestions :)',
       'ask_category' => 'What category of food would you prefer?',
@@ -18,7 +23,8 @@ class Reply
     @reply_keyboard={
       'ask_category' => @scrapper.categories,
       'show_suggestion' => 'This is my suggestions' ,
-      'yes_No' => [%w[Yes], %w[No]]
+      'yes_No' => [%w[Yes], %w[No]],
+      'commands' => [['/start', '/stop'], ['/suggest','/help']]
     }
   end
 
