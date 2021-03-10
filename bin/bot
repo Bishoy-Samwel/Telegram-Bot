@@ -30,7 +30,7 @@ Telegram::Bot::Client.run(token) do |bot|
       bot.api.send_message(chat_id: message.chat.id, text: reply.reply_txt['ask_category'],
                            reply_markup: reply.keyboard('ask_category'))
 
-    elsif message.to_s.include?('no') || message.to_s.include?('stop')
+    elsif message.to_s.include?('No') || message.to_s.include?('stop')
       bot.api.send_message(chat_id: message.chat.id, text: "Bye, #{message.from.first_name}")
 
     elsif reply.scrapper.category?(message.to_s)
