@@ -6,6 +6,8 @@
 ## Chefo The Chef Bot
 > A Telegram Bot that recommends recipes of a chosen category.
 
+![demo](./assets/demo.gif)
+
 ## Built With
 
 - Ruby
