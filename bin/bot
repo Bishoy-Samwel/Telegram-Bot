@@ -8,35 +8,38 @@ token = ENV['TOKEN']
 # token = App_Config.token
 reply = Reply.new
 
-time = [%w(Launch Breakfast), %w(Dinner)]
+# rubocop:disable Layout/LineLength
 Telegram::Bot::Client.run(token) do |bot|
   bot.listen do |message|
     next if message.nil?
+
     case message.text
     when '/start'
-      bot.api.send_message(chat_id: message.chat.id, text:"Hi, #{message.from.first_name} "+reply.reply_txt['welcome'],reply_markup: reply.keyboard('commands'))
-    when '/stop'
-      bot.api.send_message(chat_id: message.chat.id, text: "Bye, #{message.from.first_name}")
-    when 'No'
-      bot.api.send_message(chat_id: message.chat.id, text: "Bye, #{message.from.first_name}")
+      bot.api.send_message(chat_id: message.chat.id,
+                           text: "Hi, #{message.from.first_name} " + reply.reply_txt['welcome'], reply_markup: reply.keyboard('commands'))
     when '/help'
-      bot.api.send_message(chat_id: message.chat.id, text: reply.reply_txt['commands'], 
-      reply_markup: reply.keyboard('commands'))
-    when '/suggest' 
-      bot.api.send_message(chat_id: message.chat.id, text: reply.reply_txt['ask_category'], reply_markup: reply.keyboard('ask_category'))
-    when 'Yes'
-      bot.api.send_message(chat_id: message.chat.id, text: reply.reply_txt['ask_category'], reply_markup: reply.keyboard('ask_category'))
+      bot.api.send_message(chat_id: message.chat.id, text: reply.reply_txt['commands'],
+                           reply_markup: reply.keyboard('commands'))
     end
 
-    if reply.scrapper.is_category(message.to_s)
+    if message.to_s.include?('suggest') || message.to_s.include?('Yes')
+      bot.api.send_message(chat_id: message.chat.id, text: reply.reply_txt['ask_category'],
+                           reply_markup: reply.keyboard('ask_category'))
+
+    elsif message.to_s.include?('no') || message.to_s.include?('stop')
+      bot.api.send_message(chat_id: message.chat.id, text: "Bye, #{message.from.first_name}")
+
+    elsif reply.scrapper.category?(message.to_s)
       reply.get_suggestions(message)
-      bot.api.send_message(chat_id: message.chat.id, 
-        text: reply.reply_txt['suggestions'] , 
-        reply_markup: reply.keyboard('show_suggestions'))
-    elsif reply.scrapper.is_recipe(message.to_s)
+      bot.api.send_message(chat_id: message.chat.id,
+                           text: reply.reply_txt['suggestions'],
+                           reply_markup: reply.keyboard('show_suggestions'))
+    elsif reply.scrapper.recipe?(message.to_s)
       reply.get_recipe(message.to_s)
       bot.api.send_message(chat_id: message.chat.id, text: reply.reply_txt['recipe'], parse_mode: 'html')
-      bot.api.send_message(chat_id: message.chat.id, text: reply.reply_txt['another_recipes'], parse_mode: 'html', reply_markup: reply.keyboard('yes_no'))
+      bot.api.send_message(chat_id: message.chat.id, text: reply.reply_txt['another_recipes'], parse_mode: 'html',
+                           reply_markup: reply.keyboard('yes_no'))
     end
   end
 end
+# rubocop:enable Layout/LineLength

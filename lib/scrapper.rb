@@ -2,14 +2,15 @@ require 'httparty'
 require 'nokogiri'
 class Scrapper
   attr_reader :categories, :links, :recipes_titles, :recipes
+
   def initialize
     @links = {
-      'Breakfast and brunch' => '78/breakfast-and-brunch/', 
-      'Lunch' => '17561/lunch/', 
-      'Dinners' => '17562/dinner/', 
-      'Appetizer and Snacks' => '76/appetizers-and-snacks/', 
-      'Breads' =>'156/bread/',
-      'Drinks' => '77/drinks/', 
+      'Breakfast and brunch' => '78/breakfast-and-brunch/',
+      'Lunch' => '17561/lunch/',
+      'Dinners' => '17562/dinner/',
+      'Appetizer and Snacks' => '76/appetizers-and-snacks/',
+      'Breads' => '156/bread/',
+      'Drinks' => '77/drinks/',
       'Salads' => '96/salad/',
       'Deserts' => '79/desserts/',
       'Side Dishes' => '81/side-dish/',
@@ -18,14 +19,12 @@ class Scrapper
     @categories = @links.keys
   end
 
-  def is_category(message)
+  def category?(message)
     categories.include?(message)
   end
 
-  def is_recipe(message)
-    unless @recipes_titles.nil?
-      @recipes_titles.include?(message)
-    end
+  def recipe?(message)
+    @recipes_titles&.include?(message)
   end
 
   def one_recipe_info(title)
@@ -35,17 +34,16 @@ class Scrapper
   #{recipe[:description]}
     <b>#{recipe[:author]}</b>
     <a href='#{recipe[:recipes_url]}'> Read More</a>"
-    unless result.nil?
-      result
-    else
+    if result.nil?
       "Sorry I couldn't extract the required info use GOOGLE Lazy :D"
+    else
+      result
     end
-    
   end
 
   def recipes_info(category)
     recipes_dict = extract_info(category) # dictionary titles:[---]
-    @recipes_arr = [] #array of recipes
+    @recipes_arr = [] # array of recipes
     @recipes_titles = recipes_dict[:titles]
     recipes_dict[:titles].length.times do |i|
       @recipes_arr << {
