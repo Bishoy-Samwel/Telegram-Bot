@@ -6,7 +6,9 @@
 ## Chefo The Chef Bot
 > A Telegram Bot that recommends recipes of a chosen category.
 
-![demo](./assets/demo.gif)
+![1](./assets/4.png)
+![2](./assets/5.png)
+
 
 ## Built With
 
