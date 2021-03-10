@@ -1,0 +1,1 @@
+bot ruby bin/bot
