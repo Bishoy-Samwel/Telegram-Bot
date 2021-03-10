@@ -14,8 +14,8 @@ describe 'scrapper' do
     expect(scrapper.categories.length).to eql(10)
   end
 
-  it 'is_category should return true if included' do
-    expect(scrapper.is_category(first_category)).to eql(true)
+  it 'category? should return true if included' do
+    expect(scrapper.category?(first_category)).to eql(true)
   end
 
   it 'extract_info should return a dictionary of reciepes info and has 5 key-value pairs' do
@@ -27,9 +27,9 @@ describe 'scrapper' do
     expect(scrapper.recipes.nil? && scrapper.recipes_titles.nil?).not_to eql(true)
   end
 
-  it 'is_recipe should return true if included in recepies_titles' do
+  it 'recipe? should return true if included in recepies_titles' do
     scrapper.recipes_info(first_category)
     first_title = scrapper.recipes_titles.first
-    expect(scrapper.is_recipe(first_title)).to eql(true)
+    expect(scrapper.recipe?(first_title)).to eql(true)
   end
 end
