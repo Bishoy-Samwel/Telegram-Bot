@@ -3,7 +3,7 @@
 # Telegram-Chef-Bot (Ruby Capstone Project) 
 
 
-## Chefo The Librarian Bot
+## Chefo The Chef Bot
 > A Telegram Bot that recommends recipes of a chosen category.
 
 ## Built With
