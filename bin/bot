@@ -1,4 +1,8 @@
+
+# rubocop: disable Lint/ScriptPermission
 #!/usr/bin/env ruby
+# rubocop: enable Lint/ScriptPermission
+
 require 'telegram/bot'
 require_relative '../lib/app_config'
 require_relative '../lib/reply'
