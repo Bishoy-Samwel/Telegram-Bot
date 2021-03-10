@@ -1,7 +1,7 @@
 require 'httparty'
 require 'nokogiri'
 class Scrapper
-  attr_reader :categories
+  attr_reader :categories, :links, :recipes_titles, :recipes
   def initialize
     @links = {
       'Breakfast and brunch' => '78/breakfast-and-brunch/', 
@@ -30,7 +30,7 @@ class Scrapper
 
   def one_recipe_info(title)
     index = @recipes_titles.find_index(title)
-    recipe = @recipes[index]
+    recipe = @recipes_arr[index]
     result = "<b>#{recipe[:title]}</b>
   #{recipe[:description]}
     <b>#{recipe[:author]}</b>
@@ -43,17 +43,18 @@ class Scrapper
     
   end
 
-  def recipes_info(titles, descriptions, recipes_urls, reviews, authors)
-    @recipes = []
-    @recipes_titles = titles
-    titles.length.times do |i|
-      @recipes << {
+  def recipes_info(category)
+    recipes_dict = extract_info(category) # dictionary titles:[---]
+    @recipes_arr = [] #array of recipes
+    @recipes_titles = recipes_dict[:titles]
+    recipes_dict[:titles].length.times do |i|
+      @recipes_arr << {
         index: i,
-        title: titles[i],
-        description: descriptions[i],
-        recipes_url: recipes_urls[i],
-        review: reviews[i],
-        author: authors[i]
+        title: recipes_dict[:titles][i],
+        description: recipes_dict[:descriptions][i],
+        recipes_url: recipes_dict[:recipes_urls][i],
+        review: recipes_dict[:reviews][i],
+        author: recipes_dict[:authors][i]
       }
     end
     # return recipes[0]['title']
@@ -64,11 +65,12 @@ class Scrapper
     @category = @links[category]
     html = HTTParty.get("https://www.allrecipes.com/recipes/#{@category}")
     @doc = Nokogiri::HTML(html.body)
-    titles = @doc.css('.card__title').map { |title| title.content.strip }
-    descriptions = @doc.css('.card__summary').map { |summary| summary.content.strip }
-    recipes_url = @doc.css('.card__detailsContainer-left>.card__titleLink').map { |link| link['href'] }
-    reviews = @doc.css('.card__ratingCount').map { |review| review.content.strip }
-    authors = @doc.css('.card__authorName').map { |author| author.content.strip }
-    recipes_info(titles, descriptions, recipes_url, reviews, authors)
+    recipes_dict = {}
+    recipes_dict[:titles] = @doc.css('.card__title').map { |title| title.content.strip }
+    recipes_dict[:descriptions] = @doc.css('.card__summary').map { |summary| summary.content.strip }
+    recipes_dict[:recipes_urls] = @doc.css('.card__detailsContainer-left>.card__titleLink').map { |link| link['href'] }
+    recipes_dict[:reviews] = @doc.css('.card__ratingCount').map { |review| review.content.strip }
+    recipes_dict[:authors] = @doc.css('.card__authorName').map { |author| author.content.strip }
+    recipes_dict
   end
 end
