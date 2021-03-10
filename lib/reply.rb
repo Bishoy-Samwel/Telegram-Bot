@@ -23,7 +23,7 @@ class Reply
     @reply_keyboard={
       'ask_category' => @scrapper.categories,
       'show_suggestion' => 'This is my suggestions' ,
-      'yes_No' => [%w[Yes], %w[No]],
+      'yes_no' => [%w[Yes], %w[No]],
       'commands' => [['/start', '/stop'], ['/suggest','/help']]
     }
   end
@@ -34,11 +34,11 @@ class Reply
   end
 
   def get_suggestions(message)
-    @reply_keyboard['show_suggestions'] = @scrapper.extract_info(message.to_s)
+    @reply_keyboard['show_suggestions'] = @scrapper.recipes_info(message.to_s)
   end
 
-  def keyboard(keyboard)
-    array = keyboard.is_a?(String)? reply_keyboard[keyboard] : keyboard
+  def keyboard(input)
+    array = input.is_a?(String)? reply_keyboard[input] : input
     Telegram::Bot::Types::ReplyKeyboardMarkup.new(keyboard: array, one_time_keyboard: true)
   end
 
