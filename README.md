@@ -52,7 +52,7 @@ To get a local copy up and running follow these simple steps.
 ### Usage
 
 - Open Telegram app
-- Search `ChefBot` or your bot's name
+- Search `ChefoBot` or your bot's name
 - Click on the Start button or type `/start` to initialize the bot.
 - Type `/suggest` to get a recommendation of a book. You can choose from the categories listed: Breakfast, Lunch, Dinners, Appetizer and Snacks, Salads, Deserts etc...
 - Type `/help` to see the list of available commands
