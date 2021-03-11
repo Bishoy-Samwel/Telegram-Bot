@@ -5,5 +5,3 @@ gem 'rubocop'
 gem 'telegram-bot-ruby'
 
 source 'https://rubygems.org'
-
-# gem "rails"
