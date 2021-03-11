@@ -1,5 +1,6 @@
 require_relative '../lib/scrapper'
 require_relative '../lib/reply'
+require_relative '../lib/bot_logic'
 
 describe 'scrapper' do
   let(:scrapper) { Scrapper.new }
@@ -31,5 +32,25 @@ describe 'scrapper' do
     scrapper.recipes_info(first_category)
     first_title = scrapper.recipes_titles.first
     expect(scrapper.recipe?(first_title)).to eql(true)
+  end
+end
+
+describe 'bot_logic' do
+  let(:reply) { Reply.new }
+  it 'responds with welcome message when /start' do
+    response = respond('/start', '0')[0][:text]
+    expect(response.include?('Welcome to Chefo I am a Chef bot.')).to eql(true)
+  end
+  it 'responds with stop message when No or /stop' do
+    response = respond('/stop', '0')[0][:text]
+    expect(response.include?('Bye')).to eql(true)
+  end
+  it 'responds with suggest message when /suggest' do
+    response = respond('/suggest', '0')[0][:text]
+    expect(response.include?('What category of food would you prefer?')).to eql(true)
+  end
+  it 'responds with help message when /help' do
+    response = respond('/help', '0')[0][:text]
+    expect(response.include?('You can control me with these commands:')).to eql(true)
   end
 end
