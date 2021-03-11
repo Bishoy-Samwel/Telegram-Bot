@@ -27,7 +27,8 @@
 - Type in the search form BotFather.
 - Hit the start button which will display a list of commands that we can use to interact with the BotFather.
 - Let’s create our bot using the command `/newbot`.
-- `/token`, it will give us an API token to access our bot through HTTPS. (We will use it later)
+- Now we have to register for a username, note: it must end in bot.
+- Command `/token` will give us an API token to access our bot through HTTPS. (We will use it later)
  
 
 To get a local copy up and running follow these simple steps.
@@ -51,7 +52,7 @@ To get a local copy up and running follow these simple steps.
 ### Usage
 
 - Open Telegram app
-- Search ChefBot
+- Search `ChefBot` or your bot's name
 - Click on the Start button or type `/start` to initialize the bot.
 - Type `/suggest` to get a recommendation of a book. You can choose from the categories listed: Breakfast, Lunch, Dinners, Appetizer and Snacks, Salads, Deserts etc...
 - Type `/help` to see the list of available commands
