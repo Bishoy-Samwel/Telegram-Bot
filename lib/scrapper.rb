@@ -55,7 +55,6 @@ class Scrapper
         author: recipes_dict[:authors][i]
       }
     end
-    # return recipes[0]['title']
     @recipes_titles
   end
 
