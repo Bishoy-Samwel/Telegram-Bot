@@ -7,16 +7,16 @@ reply = Reply.new
 # rubocop: disable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity, Metrics/MethodLength
 define_method :respond do |message, id, first_name = ''|
   unless message.nil?
-    if message.include?('start') || message.include?('hi')
+    if message['start'] || message['Hi']
       return [{ chat_id: id,
                 text: "Hi, #{first_name} " + reply.reply_txt['welcome'], reply_markup: reply.keyboard('commands') }]
-    elsif message.include?('help')
+    elsif message['help']
       return [{ chat_id: id, text: reply.reply_txt['commands'],
                 reply_markup: reply.keyboard('commands') }]
-    elsif message.include?('suggest') || message.include?('Yes')
+    elsif message['suggest'] || message['Yes']
       return [{ chat_id: id, text: reply.reply_txt['ask_category'],
                 reply_markup: reply.keyboard('ask_category') }]
-    elsif message.include?('No') || message.include?('stop')
+    elsif message['No'] || message['stop']
       return [{ chat_id: id, text: "Bye, #{first_name}" }]
     elsif reply.scrapper.category?(message)
       reply.get_suggestions(message)
