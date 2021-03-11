@@ -4,6 +4,7 @@ require 'telegram/bot'
 
 reply = Reply.new
 
+# rubocop: disable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity, Metrics/MethodLength
 define_method :respond do |message, id, first_name = ''|
   unless message.nil?
     if message.include?('start') || message.include?('hi')
@@ -30,3 +31,4 @@ define_method :respond do |message, id, first_name = ''|
     end
   end
 end
+# rubocop: enable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity, Metrics/MethodLength
