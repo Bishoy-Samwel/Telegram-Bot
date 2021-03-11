@@ -23,6 +23,7 @@
 
 ### Creating the bot - Having the token
 - The first step in creating our bot is to talk to the BotFather.
+- Open Telegram app
 - Type in the search form BotFather.
 - Hit the start button which will display a list of commands that we can use to interact with the BotFather.
 - Let’s create our bot using the command `/newbot`.
