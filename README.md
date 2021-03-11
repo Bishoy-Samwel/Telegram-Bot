@@ -46,7 +46,7 @@ To get a local copy up and running follow these simple steps.
 #### Setup
 - Run `bundle install` to install the required gems in your computer
 - Type `export TOKEN=`+ the token value we got form BotFather
-- From within the directory of the project, type `ruby bin/bot` to run the exectuable file and hit Enter
+- From within the directory of the project, type `ruby bin/bot.rb` to run the exectuable file and hit Enter
 
 ### Usage
 
