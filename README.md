@@ -21,6 +21,15 @@
 
 ## Getting Started
 
+### Creating the bot - Having the token
+- The first step in creating our bot is to talk to the BotFather.
+- Open Telegram app
+- Type in the search form BotFather.
+- Hit the start button which will display a list of commands that we can use to interact with the BotFather.
+- Let’s create our bot using the command `/newbot`.
+- `/token`, it will give us an API token to access our bot through HTTPS. (We will use it later)
+ 
+
 To get a local copy up and running follow these simple steps.
 
 ### Prerequisites
@@ -36,7 +45,8 @@ To get a local copy up and running follow these simple steps.
 
 #### Setup
 - Run `bundle install` to install the required gems in your computer
-- From within the directory of the project, type `ruby bot` to run the exectuable file and hit Enter
+- Type `export TOKEN=`+ the token value we got form BotFather
+- From within the directory of the project, type `ruby bin/bot.rb` to run the exectuable file and hit Enter
 
 ### Usage
 
