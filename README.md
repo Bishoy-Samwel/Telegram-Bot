@@ -10,7 +10,7 @@
 ![2](./assets/5.png)
 
 ## Live Demo
-- It's depolyed (HERE)[https://bishoy-chef-bot.herokuapp.com/] on Heroku 
+- It's depolyed [HERE][https://bishoy-chef-bot.herokuapp.com/] on Heroku 
 
 ## Built With
 
