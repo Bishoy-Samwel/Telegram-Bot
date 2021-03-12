@@ -1,7 +1,6 @@
 require_relative '../lib/scrapper'
 require_relative '../lib/reply'
 require_relative '../lib/bot_logic'
-# rubocop: disable  Metrics/BlockLength
 describe 'scrapper' do
   let(:scrapper) { Scrapper.new }
   let(:first_category) { scrapper.links.keys.first }
@@ -120,4 +119,3 @@ describe 'bot_logic' do
     expect(response.include?('Welcome')).to_not eql(true)
   end
 end
-# rubocop: enable  Metrics/BlockLength
